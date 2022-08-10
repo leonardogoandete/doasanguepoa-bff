@@ -1,24 +1,15 @@
 {
-  "name": "doasanguepoa",
+  "name": "doasanguepoa-bff",
   "version": "1.0.0",
-  "description": "Projeto engenharia de software III",
   "main": "index.js",
-  "scripts": {
-    "start": "node ./src/index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leonardogoandete/doasanguepoa.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/leonardogoandete/doasanguepoa/issues"
-  },
-  "homepage": "https://github.com/leonardogoandete/doasanguepoa#readme",
+  "repository": "https://github.com/leonardogoandete/doasanguepoa-bff.git",
+  "author": "leonardo.goandete <leonardo.goandete@hotmail.com>",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.1",
     "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "node ./src/index"
   }
 }
