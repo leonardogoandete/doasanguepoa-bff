@@ -11,6 +11,20 @@ app.get("/", (req, res) => {
     res.send("Hello, world!");
 });
 
+// middleware
+function verifyIfExistsAccountCPF(request, response, next) {
+    const { cpf } = request.headers;
+    const customer = customers.find(customer => customer.cpf === cpf);
+
+    if(!customer){
+        return response.status(400).json({ error: "Customer not found"});
+    }
+    
+    request.customer = customer;
+
+    return next();
+}
+
 app.post("/account", (request, response) => {
     const { cpf, nome } = request.body;
     const customersAlreadyExist = customers.some(
@@ -31,14 +45,9 @@ app.post("/account", (request, response) => {
     return response.status(201).send('<p>Cadastro do realizado com sucesso!</p>');
 });
 
-app.get("/statement", (request, response) => {
-    const { cpf } = request.headers;
-    const customer = customers.find(customer => customer.cpf === cpf);
-
-    if(!customer){
-        return response.status(400).json({ error: "Customer not found"});
-    }
-
+//app.use(verifyIfExistsAccountCPF);
+app.get("/statement", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
     return response.json(customer.statement);
 });
 
