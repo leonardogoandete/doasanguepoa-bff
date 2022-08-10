@@ -9,6 +9,7 @@ const customers = [];
 
 app.get("/", (req, res) => {
     res.send("Hello, world!");
+    res.send("Oi, animal!")
 });
 
 // middleware
