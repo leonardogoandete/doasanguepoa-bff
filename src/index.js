@@ -42,7 +42,7 @@ app.post("/account", (request, response) => {
         statement: [],
     });
 
-    return response.status(201).send('<p>Cadastro do realizado com sucesso</p>');
+    return response.status(201).send('<p>Cadastro do realizado com sucesso!</p>');
 });
 
 //app.use(verifyIfExistsAccountCPF);
