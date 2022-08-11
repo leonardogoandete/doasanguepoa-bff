@@ -14,7 +14,7 @@ if (process.env.LE_URL && process.env.LE_CONTENT) {
   }
 
 app.get("/", (req, res) => {
-    res.send("Hello, world!");
+    res.send("Hello, world!2");
 });
 
 // middleware
