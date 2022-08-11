@@ -9,7 +9,7 @@ const customers = [];
 
 if (process.env.LE_URL && process.env.LE_CONTENT) {
     app.get(process.env.LE_URL, function(req, res) {
-      return res.send(process.env.LE_CONTENT)
+      return res.sendFile(LE_CONTENT);
     });
   }
 
