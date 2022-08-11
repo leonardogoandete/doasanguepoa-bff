@@ -1,3 +1,5 @@
+import { SwaggerUi } from "swagger-ui-express";
+import swaggerDocs from "./swagger.json";
 const { request, response } = require("express");
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
@@ -5,11 +7,12 @@ const port = process.env.PORT || 3333;
 const app = express();
 app.use(express.json());
 
+app.use("/api-docs", SwaggerUi.serve, Swagg.setup());
 const customers = [];
 
 app.get("/", (req, res) => {
     res.send("Hello, world!");
-    res.send("Oi, animal!")
+    res.send("Oi, Enzo teste!");
 });
 
 // middleware
