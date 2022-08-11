@@ -7,6 +7,12 @@ app.use(express.json());
 
 const customers = [];
 
+if (process.env.LE_URL && process.env.LE_CONTENT) {
+    app.get(process.env.LE_URL, function(req, res) {
+      return res.send(process.env.LE_CONTENT)
+    });
+  }
+
 app.get("/", (req, res) => {
     res.send("Hello, world!");
 });
