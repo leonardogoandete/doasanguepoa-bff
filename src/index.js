@@ -3,6 +3,11 @@ const app = express();
 const port = process.env.PORT || 3333;
 app.use(express.json());
 
+if (process.env.LE_URL && process.env.LE_CONTENT) {
+    app.get(process.env.LE_URL, function (req, res) {
+        return res.send(process.env.LE_CONTENT)
+    });
+}
 
 const db = mysql.createPool({
     host: "",
