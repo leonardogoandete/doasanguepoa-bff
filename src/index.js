@@ -14,6 +14,7 @@ if (process.env.LE_URL && process.env.LE_CONTENT) {
 }
 
 app.get("/", (req, res) => {
+    db.query("SELECT * FROM db");
     const teste = process.env.TESTE;
     res.send(teste);
 });
