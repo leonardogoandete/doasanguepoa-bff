@@ -9,12 +9,6 @@ if (process.env.LE_URL && process.env.LE_CONTENT) {
     });
 }
 
-const db = mysql.createPool({
-    host: "",
-    user: "",
-    password: "",
-    database: "", //nome do banco
-});
 
 
 
