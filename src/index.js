@@ -3,14 +3,13 @@ const app = express();
 const port = process.env.PORT || 3333;
 app.use(express.json());
 
+const customers = [];
+
 if (process.env.LE_URL && process.env.LE_CONTENT) {
     app.get(process.env.LE_URL, function (req, res) {
         return res.send(process.env.LE_CONTENT)
     });
 }
-
-
-
 
 app.get("/", (req, res) => {
     const teste = process.env.TESTE;
@@ -44,8 +43,7 @@ app.post("/account", (request, response) => {
     customers.push({
         cpf,
         nome,
-        id: id = uuidv4(),
-        statement: [],
+        statement: []
     });
 
     return response.status(201).send('<p>Cadastro do realizado com sucesso!</p>');
