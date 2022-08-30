@@ -3,6 +3,8 @@ const app = express();
 const port = process.env.PORT || 3333;
 app.use(express.json());
 
+
+const db = require("./dbConnect.js");
 const customers = [];
 
 if (process.env.LE_URL && process.env.LE_CONTENT) {
