@@ -14,7 +14,8 @@ const db = mysql.createPool({
 
 
 app.get("/", (req, res) => {
-    res.send(process.env.TESTE);
+    const teste = process.env.TESTE;
+    res.send(teste);
 });
 
 // middleware
