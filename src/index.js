@@ -11,11 +11,13 @@ app.get("/", (req, res) => {
    require("./dbConnect.js");
 });
 
-// middleware
-function verifyIfExistsAccountCPF(request, response, next) {
-    const { cpf } = request.headers;
-    const customer = customers.find(customer => customer.cpf === cpf);
+app.get('/users', db.getUsers)
 
+// middleware
+function verifyIfExistsName(request, response, next) {
+    const { name } = request.headers;
+    //const customer = customers.find(customer => customer.cpf === cpf);
+    
     if (!customer) {
         return response.status(400).json({ error: "Customer not found" });
     }
