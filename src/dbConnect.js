@@ -55,6 +55,15 @@ const updateUser = (request, response) => {
   )
 }
 
+const getUsersTeste = (request, response) => {
+  pool.query('SELECT * FROM teste ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const deleteUser = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -72,4 +81,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getUsersTeste,
 }
