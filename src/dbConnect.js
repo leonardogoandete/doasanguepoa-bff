@@ -31,7 +31,7 @@ const getUserById = (request, response) => {
 const createUser = (request, response) => {
   const { nome, idade } = request.body
 
-  client.query('INSERT INTO users (nome, idade) VALUES ($1, $2)', [nome, idade], (error, results) => {
+  client.query('INSERT INTO users (nome, idade) VALUES ($1, $2, $3)', [id, nome, idade], (error, results) => {
     if (error) {
       throw error
     }
