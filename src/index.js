@@ -13,6 +13,7 @@ app.listen(port, () => {
 
 //teste
 app.get('/teste', db.getUsersTeste)
+app.post('/teste', db.createUserTeste)
 
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)

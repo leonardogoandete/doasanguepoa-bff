@@ -55,15 +55,6 @@ const updateUser = (request, response) => {
   )
 }
 
-const getUsersTeste = (request, response) => {
-  pool.query('SELECT * FROM teste ORDER BY id ASC', (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
-
 const deleteUser = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -75,6 +66,27 @@ const deleteUser = (request, response) => {
   })
 }
 
+// teste
+const createUserTeste = (request, response) => {
+  const { name, email } = request.body
+
+  client.query('INSERT INTO teste (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`User added with ID: ${results.rows[0].id}`)
+  })
+}
+
+const getUsersTeste = (request, response) => {
+  client.query('SELECT * FROM teste ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 module.exports = {
   getUsers,
   getUserById,
@@ -82,4 +94,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getUsersTeste,
+  createUserTeste,
 }
