@@ -68,18 +68,18 @@ const deleteUser = (request, response) => {
 
 // teste
 const createUserTeste = (request, response) => {
-  const { name, email } = request.body
+  const { name, tipo } = request.body
 
-  client.query('INSERT INTO teste (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+  client.query('INSERT INTO teste (name, tipo) VALUES ($1, $2) RETURNING *', [name, tipo], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`User added with ID: ${results.rows[0].id}`)
+    response.status(201).send(`User added with ID: ${results.rows[0].product_no}`)
   })
 }
 
 const getUsersTeste = (request, response) => {
-  client.query('SELECT * FROM teste ORDER BY id ASC', (error, results) => {
+  client.query('SELECT * FROM teste ORDER BY product_no ASC', (error, results) => {
     if (error) {
       throw error
     }
