@@ -87,6 +87,17 @@ const getUsersTeste = (request, response) => {
   })
 }
 
+const getUserTesteById = (request, response) => {
+  const id = parseInt(request.params.id)
+
+  client.query('SELECT * FROM teste WHERE product_no = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 module.exports = {
   getUsers,
   getUserById,
@@ -95,4 +106,5 @@ module.exports = {
   deleteUser,
   getUsersTeste,
   createUserTeste,
+  getUserTesteById,
 }
