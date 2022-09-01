@@ -7,12 +7,6 @@ app.use(express.json());
 const db = require("./dbConnect.js");
 const customers = [];
 
-if (process.env.LE_URL && process.env.LE_CONTENT) {
-    app.get(process.env.LE_URL, function (req, res) {
-        return res.send(process.env.LE_CONTENT)
-    });
-}
-
 app.get("/", (req, res) => {
    require("./dbConnect.js");
 });
