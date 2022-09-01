@@ -10,6 +10,8 @@ app.listen(port, () => {
 });
 
 
+//Healh Check
+app.get("/", (request, response) => response.sendStatus(200));
 
 //teste
 app.get('/teste', db.getUsersTeste)
