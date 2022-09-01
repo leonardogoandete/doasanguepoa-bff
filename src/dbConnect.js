@@ -1,11 +1,12 @@
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
+  log: console.log,
   ssl: {
     rejectUnauthorized: false
   }
 });
-
+client.connect();
 
 const getUsers = (request, response) => {
   client.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
@@ -28,9 +29,9 @@ const getUserById = (request, response) => {
 }
 
 const createUser = (request, response) => {
-  const { name, email } = request.body
+  const { nome, idade } = request.body
 
-  client.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+  client.query('INSERT INTO users (nome, idade) VALUES ($1, $2)', [nome, idade], (error, results) => {
     if (error) {
       throw error
     }
@@ -40,11 +41,11 @@ const createUser = (request, response) => {
 
 const updateUser = (request, response) => {
   const id = parseInt(request.params.id)
-  const { name, email } = request.body
+  const { nome, idade } = request.body
 
   client.query(
-    'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-    [name, email, id],
+    'UPDATE users SET nome = $1, idade = $2 WHERE id = $3',
+    [nome, idade, id],
     (error, results) => {
       if (error) {
         throw error
