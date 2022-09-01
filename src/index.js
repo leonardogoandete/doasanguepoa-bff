@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 3333;
 app.use(express.json());
@@ -8,7 +9,7 @@ const db = require("./dbConnect.js");
 const customers = [];
 
 app.get("/", (req, res) => {
-   require("./dbConnect.js");
+    require("./dbConnect.js");
 });
 
 app.get('/users', db.getUsers)
