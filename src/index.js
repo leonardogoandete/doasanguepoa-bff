@@ -18,6 +18,11 @@ app.get('/users/:id', db.getUserById)
 app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
+app.get('/instituicao', db.getInstituicao)
+app.get('/instituicao/:id', db.getInstituicaoById)
+app.post('/instituicao', db.createInstituicao)
+app.put('/instituicao/:id', db.updateInstituicao)
+app.delete('/instituicao/:id', db.deleteInstituicao)
 
 
 
