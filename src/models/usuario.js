@@ -1,6 +1,5 @@
 const sequelize = require('sequelize');
 const database = require('../db.js');
-const shema = "";
 
 class Usuario extends sequelize.Model { }
 
@@ -36,7 +35,7 @@ Usuario.init(
         },
     },
     {
-        sequelize: database, modelName: 'usuarios', shema
+        sequelize: database, modelName: 'usuarios'
     }
 )
 
