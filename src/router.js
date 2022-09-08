@@ -1,7 +1,12 @@
+const { response } = require('express');
 const express = require('express');
 const controllerUsuario = require('./controllers/UsuarioController.js');
 
 const routes = express.Router();
+
+routes.get('/', (req, res) => {
+ res.json({'Status': 'UP'});   
+});
 
 routes.get('/usuarios', controllerUsuario.List);
 
