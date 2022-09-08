@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 yarn.lock
-/src/db.js
+/src/db.*
 #package-lock.json
 #package.json
 # Diagnostic reports (https://nodejs.org/api/report.html)
