@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const database = require('../db');
+const database = require('../db.js');
 const shema = "";
 
 class Usuario extends sequelize.Model { }
