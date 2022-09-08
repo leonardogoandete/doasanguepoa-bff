@@ -1,17 +1,17 @@
 const express = require('express');
-const controllerProduto = require('./controllers/ProdutoController');
+const controllerUsuario = require('./controllers/UsuarioController.js');
 
 const routes = express.Router();
 
-routes.get('/List', controllerProduto.List);
+routes.get('/usuarios', controllerUsuario.List);
 
-routes.post('/Create', controllerProduto.Create);
+routes.post('/usuarios', controllerUsuario.Create);
 
-routes.post('/Update', controllerProduto.Update);
+routes.post('/usuarios/:id', controllerUsuario.Update);
 
-// routes.get('/GetOne', controllerProduto.GetOne);
-routes.post('/GetOne', controllerProduto.GetOne); // MUDAMOS PARA POST
+// routes.get('/GetOne', controllerUsuario.GetOne);
+routes.post('/GetOne', controllerUsuario.GetOne); // MUDAMOS PARA POST
 
-routes.post('/Delete', controllerProduto.Delete);
+routes.post('/Delete', controllerUsuario.Delete);
 
 module.exports = routes;

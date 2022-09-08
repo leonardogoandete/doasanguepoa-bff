@@ -1,3 +1,4 @@
+const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
 
 module.exports =
@@ -41,11 +42,10 @@ module.exports =
 
     async Update(req, res) {
         try {
-
             const usu = await ModelUsuario.findByPk(req.body.id_usuario);
             if (usu) {
                 usu.nome = req.body.nome;
-                usu.DataAtualizacao = new Date();
+                usu.DataAtualizacao = new Date()
                 await usu.save();
             }
 
