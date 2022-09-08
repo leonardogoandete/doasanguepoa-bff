@@ -1,4 +1,4 @@
-//const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 //const sequelize = new Sequelize('postgres://postgres@localhost:5432/crud', {dialect: 'postgres'});
 
 //const sequelize = require('sequelize');
