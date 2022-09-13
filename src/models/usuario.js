@@ -6,7 +6,7 @@ class Usuario extends sequelize.Model { }
 
 Usuario.init(
     {
-        id_usuario:
+        id:
         {
             type: sequelize.INTEGER,
             autoIncrement: true,

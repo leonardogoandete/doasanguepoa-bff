@@ -32,6 +32,26 @@ module.exports =
                     DataCriacao: date = new Date(),
                     DataAtualizacao: null
                 }
+                /*
+
+                https://stackoverflow.com/questions/17201450/salt-and-hash-password-in-nodejs-w-crypto
+  encript
+                function hashPassword(password) {
+    var salt = crypto.randomBytes(128).toString('base64');
+    var iterations = 10000;
+    var hash = pbkdf2(password, salt, iterations);
+
+    return {
+        salt: salt,
+        hash: hash,
+        iterations: iterations
+    };
+}
+descript
+function isPasswordCorrect(savedHash, savedSalt, savedIterations, passwordAttempt) {
+    return savedHash == pbkdf2(passwordAttempt, savedSalt, savedIterations);
+}
+*/
             );
             return res.json(usuarios);
 
@@ -42,7 +62,7 @@ module.exports =
 
     async Update(req, res) {
         try {
-            const usu = await ModelUsuario.findByPk(req.body.id_usuario);
+            const usu = await ModelUsuario.findByPk(req.params.id);
             if (usu) {
                 usu.nome = req.body.nome;
                 usu.DataAtualizacao = new Date();
@@ -59,7 +79,7 @@ module.exports =
     async GetOne(req, res) {
         try {
 
-            const usu = await ModelProduto.findByPk(req.body.id_usuario);
+            const usu = await ModelUsuario.findByPk(req.params.id);
 
             return res.json(usu);
 
@@ -71,7 +91,7 @@ module.exports =
     async Delete(req, res) {
         try {
 
-            const usu = await ModelUsuario.findByPk(req.body.id_usuario);
+            const usu = await ModelUsuario.findByPk(req.params.id);
             await usu.destroy();
             return res.json(usu);
 

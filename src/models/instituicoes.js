@@ -6,7 +6,7 @@ class Instituicao extends sequelize.Model { }
 
 Instituicao.init(
     {
-        id_instituicoes:
+        id:
         {
             type: sequelize.INTEGER,
             autoIncrement: true,

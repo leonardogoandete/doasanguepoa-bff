@@ -42,7 +42,7 @@ module.exports =
 
     async Update(req, res) {
         try {
-            const inst = await ModelInstituicao.findByPk(req.params.id_instituicao);
+            const inst = await ModelInstituicao.findByPk(req.params.id);
             if (inst) {
                 inst.nome = req.body.nome;
                 inst.DataAtualizacao = new Date();
@@ -59,7 +59,7 @@ module.exports =
     async GetOne(req, res) {
         try {
 
-            const inst = await ModelInstituicao.findByPk(req.params.id_instituicao);
+            const inst = await ModelInstituicao.findByPk(req.params.id);
 
             return res.json(inst);
 
@@ -71,7 +71,7 @@ module.exports =
     async Delete(req, res) {
         try {
 
-            const inst = await ModelInstituicao.findByPk(req.params.id_instituicao);
+            const inst = await ModelInstituicao.findByPk(req.params.id);
             await inst.destroy();
             return res.json(inst);
 
