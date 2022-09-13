@@ -1,5 +1,6 @@
 const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
+const bcrypt = require('bcrypt');
 
 module.exports =
 {
@@ -22,36 +23,18 @@ module.exports =
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
         
         try {
+            const senhaCriptografada = await bcrypt.hash(req.body.senha, 10);
             const usuarios = await ModelUsuario.create(
                 {
                    //Codigo: req.body.Codigo, // Comentado para gerar automatico
                     nome: req.body.nome,
                     cpf: req.body.cpf,
                     email: req.body.email,
-                    senha: req.body.senha,
+                    //senha: req.body.senha,
+                    senha: senhaCriptografada,
                     DataCriacao: date = new Date(),
                     DataAtualizacao: null
                 }
-                /*
-
-                https://stackoverflow.com/questions/17201450/salt-and-hash-password-in-nodejs-w-crypto
-  encript
-                function hashPassword(password) {
-    var salt = crypto.randomBytes(128).toString('base64');
-    var iterations = 10000;
-    var hash = pbkdf2(password, salt, iterations);
-
-    return {
-        salt: salt,
-        hash: hash,
-        iterations: iterations
-    };
-}
-descript
-function isPasswordCorrect(savedHash, savedSalt, savedIterations, passwordAttempt) {
-    return savedHash == pbkdf2(passwordAttempt, savedSalt, savedIterations);
-}
-*/
             );
             return res.json(usuarios);
 
