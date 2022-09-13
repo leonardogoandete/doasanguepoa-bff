@@ -1,6 +1,6 @@
 const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
-const bcrypt = require('bcrypt');
+const cript = require('../utils/senha.js');
 
 module.exports =
 {
@@ -23,20 +23,18 @@ module.exports =
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
         
         try {
-            const senhaCriptografada = await bcrypt.hash(req.body.senha, 10);
             const usuarios = await ModelUsuario.create(
                 {
                    //Codigo: req.body.Codigo, // Comentado para gerar automatico
                     nome: req.body.nome,
                     cpf: req.body.cpf,
                     email: req.body.email,
-                    //senha: req.body.senha,
-                    senha: senhaCriptografada,
+                    senha: cript(req.body.senha),
                     DataCriacao: date = new Date(),
                     DataAtualizacao: null
                 }
             );
-            return res.json(usuarios);
+            return res.body("<h3>Usuario cadastrado com sucesso!</h3>");
 
         } catch (erro) {
             return console.error("Erro na Create : ", erro);
@@ -64,7 +62,8 @@ module.exports =
 
             const usu = await ModelUsuario.findByPk(req.params.id);
 
-            return res.json(usu);
+            //return res.json(usu);
+            return res.send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>");
 
         } catch (erro) {
             return console.error("Erro na Update : ", erro);

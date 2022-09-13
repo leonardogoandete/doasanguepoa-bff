@@ -1,6 +1,6 @@
 const { request } = require('express');
 const ModelInstituicao = require('../models/instituicoes');
-const bcrypt = require('bcrypt');
+const cript = require('../utils/senha.js');
 
 module.exports =
 {
@@ -23,14 +23,13 @@ module.exports =
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
         
         try {
-            const senhaCriptografada = await bcrypt.hash(req.body.senha, 10);
             const instituicoes = await ModelInstituicao.create(
                 {
                    //Codigo: req.body.Codigo, // Comentado para gerar automatico
                     nome: req.body.nome,
                     cnpj: req.body.cnpj,
                     email: req.body.email,
-                    senha: senhaCriptografada,
+                    senha: cript(req.body.senha),
                     DataCriacao: date = new Date(),
                     DataAtualizacao: null
                 }
