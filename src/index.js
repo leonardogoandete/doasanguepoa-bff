@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config()
 const routes = require('./router');
+const cookieParser = require('cookie-parser')
 
 app.listen(port, () => {
     console.info(`Listening on http://localhost:${port}`);
@@ -10,5 +11,6 @@ app.listen(port, () => {
 
 app.use(express.json());
 app.use(routes);
+app.use(cookieParser())
 
 
