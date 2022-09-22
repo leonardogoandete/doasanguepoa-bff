@@ -22,11 +22,14 @@ Usuario.init(
         {
             type: sequelize.STRING,
             allowNull: false,
+            unique: true,
         },
         email:
         {
             type: sequelize.STRING,
             allowNull: false,
+            isEmail: true,
+            unique: true,
         },
         senha:
         {

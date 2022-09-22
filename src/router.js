@@ -14,6 +14,7 @@ routes.get('/usuarios/:id', controllerUsuario.GetOne);
 routes.post('/usuarios', controllerUsuario.Create);
 routes.put('/usuarios/:id', controllerUsuario.Update);
 routes.delete('/usuarios/:id', controllerUsuario.Delete);
+routes.post('/login', controllerUsuario.Login);
 
 routes.get('/instituicoes', controllerInstituicao.List);
 routes.get('/instituicoes/:id', controllerInstituicao.GetOne);

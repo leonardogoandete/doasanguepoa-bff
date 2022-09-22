@@ -1,6 +1,7 @@
 const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
@@ -81,11 +82,56 @@ const Delete = async(req, res) => {
         }
     };
 
+const Login = async(req,res,next) => {
+res.header("Access-Control-Allow-Origin", "*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+const {cpf, senha} = req.body;
+// validations
+if (!cpf) {
+    return res.status(422).json({ msg: "O email é obrigatório!" });
+  }
+
+  if (!senha) {
+    return res.status(422).json({ msg: "A senha é obrigatória!" });
+  }
+
+  // check if user exists
+  const user = await ModelUsuario.findOne({ where :{ cpf: cpf}});
+  //console.log("Validando:"+ user.nome + "senha: " + user.senha);
+  //console.log("Validando:"+ user.nome);
+
+  if (!user) {
+    return res.status(404).json({ msg: "Usuário não encontrado!" });
+  }
+
+  // check if password match
+  const checkPassword = await bcrypt.compare(senha, user.senha);
+
+  if (!checkPassword) {
+    return res.status(422).json({ msg: "Senha inválida" });
+  }
+
+  try {
+    const secret = process.env.SECRET;
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      secret
+    );
+
+    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
 module.exports = {
     List,
     Create,
     Update,
     GetOne,
-    Delete
+    Delete,
+    Login
 }
