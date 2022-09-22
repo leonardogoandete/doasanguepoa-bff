@@ -2,9 +2,7 @@ const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 
-module.exports =
-{
-    async List(req, res) {
+const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
@@ -14,9 +12,9 @@ module.exports =
         } catch (erro) {
             return console.error("Erro na List : ", erro);
         }
-    },
+    };
 
-    async Create(req, res) {
+const Create = async(req, res) => {
               //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
 	//Quais são os métodos que a conexão pode realizar na API
@@ -40,9 +38,9 @@ module.exports =
         } catch (erro) {
             return console.error("Erro na Create : ", erro);
         }
-    },
+    };
 
-    async Update(req, res) {
+const Update = async(req, res) => {
         try {
             const usu = await ModelUsuario.findByPk(req.params.id);
             if (usu) {
@@ -56,9 +54,9 @@ module.exports =
         } catch (erro) {
             return console.error("Erro na Update : ", erro);
         }
-    },
+    };
 
-    async GetOne(req, res) {
+const GetOne = async(req, res) => {
         try {
 
             const usu = await ModelUsuario.findByPk(req.params.id);
@@ -69,9 +67,9 @@ module.exports =
         } catch (erro) {
             return console.error("Erro na Update : ", erro);
         }
-    },
+    };
 
-    async Delete(req, res) {
+const Delete = async(req, res) => {
         try {
 
             const usu = await ModelUsuario.findByPk(req.params.id);
@@ -81,7 +79,13 @@ module.exports =
         } catch (erro) {
             return console.error("Erro na Update : ", erro);
         }
-    }
+    };
 
 
+module.exports = {
+    List,
+    Create,
+    Update,
+    GetOne,
+    Delete
 }
