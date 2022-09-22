@@ -55,7 +55,7 @@ const Update = async(req, res) => {
         } catch (erro) {
             return console.error("Erro na Update : ", erro);
         }
-    },
+    };
 
 const GetOne = async(req, res) => {
         try {
