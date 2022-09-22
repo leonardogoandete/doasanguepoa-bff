@@ -1,6 +1,6 @@
 const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
-const cript = require('../utils/senha.js');
+const bcrypt = require('bcrypt');
 
 module.exports =
 {
@@ -22,19 +22,20 @@ module.exports =
 	//Quais são os métodos que a conexão pode realizar na API
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
         
-        try {
-            const usuarios = await ModelUsuario.create(
-                {
-                   //Codigo: req.body.Codigo, // Comentado para gerar automatico
-                    nome: req.body.nome,
-                    cpf: req.body.cpf,
-                    email: req.body.email,
-                    senha: cript(req.body.senha),
-                    DataCriacao: date = new Date(),
-                    DataAtualizacao: null
-                }
-            );
-            return res.body("<h3>Usuario cadastrado com sucesso!</h3>");
+    try {
+        const senhaCriptografada = await bcrypt.hash(req.body.senha, 10);
+        const usuarios = await ModelUsuario.create(
+            {
+               //Codigo: req.body.Codigo, // Comentado para gerar automatico
+                nome: req.body.nome,
+                cpf: req.body.cpf,
+                email: req.body.email,
+                senha: senhaCriptografada,
+                DataCriacao: date = new Date(),
+                DataAtualizacao: null
+            }
+        );
+            return res.json(usuarios);
 
         } catch (erro) {
             return console.error("Erro na Create : ", erro);
