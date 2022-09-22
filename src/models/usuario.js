@@ -16,7 +16,7 @@ Usuario.init(
         nome:
         {
             type: sequelize.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         cpf:
         {
