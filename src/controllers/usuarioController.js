@@ -82,7 +82,7 @@ const Delete = async(req, res) => {
         }
     };
 
-const Login = async(req,res,next) => {
+const Login = async(req,res) => {
 res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 const {cpf, senha} = req.body;
