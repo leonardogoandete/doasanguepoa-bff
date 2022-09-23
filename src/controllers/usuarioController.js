@@ -1,7 +1,7 @@
 const { request } = require('express');
-const ModelUsuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ModelUsuario = require('../models/usuario');
 
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
