@@ -1,7 +1,7 @@
 const { request } = require('express');
 const ModelUsuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
@@ -88,7 +88,7 @@ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Ty
 const {cpf, senha} = req.body;
 // validations
 if (!cpf) {
-    return res.status(422).json({ msg: "O email é obrigatório!" });
+    return res.status(422).json({ msg: "O CPF é obrigatório!" });
   }
 
   if (!senha) {
