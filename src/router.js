@@ -13,8 +13,9 @@ routes.get('/', (req, res) => {
 function verificaJWT(req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
-        if (err) return res.status(401).end();
+        if (err) return res.status(401).json({ message: "Não autenticado"});
         req.id = decoded.id;
+        console.log(req.id + 'fez a chamada');
         next();
     })
 };
