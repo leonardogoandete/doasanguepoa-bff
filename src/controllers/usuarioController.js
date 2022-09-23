@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { request } = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -98,8 +97,6 @@ if (!cpf) {
 
   // check if user exists
   const user = await ModelUsuario.findOne({ where :{ cpf: cpf}});
-  //console.log("Validando:"+ user.nome + "senha: " + user.senha);
-  //console.log("Validando:"+ user.nome);
 
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });
@@ -113,19 +110,9 @@ if (!cpf) {
   }
 
   try {
-    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300})
-    //const token = jwt.sign(
-    //  {
-    //    id: user._id,
-    //  },
-    //  secret
-      
-    //);
-    //res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
-    //console.log(token);
-
-    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
-    //res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
+//    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300})
+    //res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+    res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
