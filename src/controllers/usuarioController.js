@@ -1,6 +1,6 @@
 const { request } = require('express');
 const bcrypt = require('bcrypt');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const ModelUsuario = require('../models/usuario');
 
 const List = async(req, res) => {
@@ -112,6 +112,7 @@ if (!cpf) {
   }
 
   try {
+    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300})
     //const token = jwt.sign(
     //  {
     //    id: user._id,
@@ -122,8 +123,8 @@ if (!cpf) {
     //res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
     //console.log(token);
 
-    //res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
-    res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
+    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+    //res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
