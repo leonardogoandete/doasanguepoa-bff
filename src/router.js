@@ -1,7 +1,7 @@
 const { response } = require('express');
 const express = require('express');
-const controllerUsuario = require('./controllers/usuarioController.js');
-const controllerInstituicao = require('./controllers/instituicaoController.js');
+const controllerUsuario = require('./controllers/usuariocontroller.js');
+const controllerInstituicao = require('./controllers/instituicaocontroller.js');
 
 const routes = express.Router();
 
