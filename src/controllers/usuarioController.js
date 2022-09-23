@@ -110,9 +110,9 @@ if (!cpf) {
   }
 
   try {
-//    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300})
-    //res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
-    res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
+    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300})
+    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+    //res.status(200).json({ msg: "Autenticação realizada com sucesso!"});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
