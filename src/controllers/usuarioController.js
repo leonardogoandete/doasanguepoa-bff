@@ -16,7 +16,7 @@ const List = async(req, res) => {
     };
 
 const Create = async(req, res) => {
-              //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
 	//Quais são os métodos que a conexão pode realizar na API
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
@@ -71,6 +71,7 @@ const GetOne = async(req, res) => {
     };
 
 const Delete = async(req, res) => {
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
         try {
 
             const usu = await ModelUsuario.findByPk(req.params.id);
@@ -110,7 +111,7 @@ if (!cpf) {
   }
 
   try {
-    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 60000 }) // 60000 = 1 minuto
+    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300 }) // 300 = 5 minuto
     res.cookie("jwt", token, { maxAge: 300, httpOnly: true });
     res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
   } catch (error) {
