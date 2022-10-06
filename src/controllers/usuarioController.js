@@ -83,7 +83,7 @@ const Delete = async(req, res) => {
         }
     };
 
-const Login = async(req,res, next) => {
+const loginUsuario = async(req,res, next) => {
 res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 const {cpf, senha} = req.body;
@@ -111,7 +111,7 @@ if (!cpf) {
   }
 
   try {
-    const token = jwt.sign({id: user.id}, process.env.SECRET, { expiresIn: 300 }) // 300 = 5 minuto
+    const token = jwt.sign({id: user.id}, process.env.SECRET_USUARIO, { expiresIn: 300 }) // 300 = 5 minuto
     res.cookie("jwt", token, { maxAge: 300, httpOnly: true });
     res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
   } catch (error) {
@@ -135,5 +135,5 @@ module.exports = {
     Update,
     GetOne,
     Delete,
-    Login
+    loginUsuario
 }

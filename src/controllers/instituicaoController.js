@@ -1,6 +1,8 @@
 const { request } = require('express');
-const ModelInstituicao = require('../models/instituicoes');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const ModelInstituicao = require('../models/instituicoes');
+
 
 
 const List = async(req, res) => {
@@ -81,11 +83,57 @@ const Delete = async(req, res) => {
         }
     };
 
+    const loginInstituicao = async(req,res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        const {cnpj, senha} = req.body;
+        // validations
+        if (!cnpj) {
+            return res.status(422).json({ msg: "O CNPJ é obrigatório!" });
+          }
+        
+          if (!senha) {
+            return res.status(422).json({ msg: "A senha é obrigatória!" });
+          }
+        
+          // check if user exists
+          const instituicao = await ModelInstituicao.findOne({ where :{ cnpj: cnpj}});
+        
+          if (!instituicao) {
+            return res.status(404).json({ msg: "Instituicao não encontrada!" });
+          }
+        
+          // check if password match
+          const checkPassword = await bcrypt.compare(senha, instituicao.senha);
+        
+          if (!checkPassword) {
+            return res.status(422).json({ msg: "Senha inválida" });
+          }
+        
+          try {
+            const token = jwt.sign({id: instituicao.id}, process.env.SECRET_INSTITUICAO, { expiresIn: 300 }) // 300 = 5 minuto
+            res.cookie("jwt", token, { maxAge: 300, httpOnly: true });
+            res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+          } catch (error) {
+            res.status(500).json({ msg: error });
+          }
+        };
+        /*
+        function verificaJWT(req, res, next) {
+            const token = req.headers['x-access-token'];
+            jwt.verify(token, process.env.SECRET, (err, decoded) => {
+                if (err) return res.status(401).end();
+                req.id = decoded.id;
+                next();
+            })
+        };
+        */
 
 module.exports = {
     List,
     Create,
     Update,
     GetOne,
-    Delete
+    Delete,
+    loginInstituicao
 }

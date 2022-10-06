@@ -10,27 +10,38 @@ routes.get('/', (req, res) => {
  res.json({'Status': 'UP'});   
 });
 
-function verificaJWT(req, res, next) {
+function verificaJWTUsuario(req, res, next) {
     const token = req.headers['x-access-token'];
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
-        if (err) return res.status(401).json({ message: "Não autenticado"});
+    jwt.verify(token, process.env.SECRET_USUARIO, (err, decoded) => {
+        if (err) return res.status(401).json({ message: "Usuario ão autenticado"});
         req.id = decoded.id;
         console.log(req.id + 'fez a chamada');
         next();
     })
 };
 
-routes.get('/usuarios',verificaJWT, controllerUsuario.List);
+function verificaJWTInstituicao(req, res, next) {
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, process.env.SECRET_INSTITUICAO, (err, decoded) => {
+        if (err) return res.status(401).json({ message: "Instituicao não autenticada"});
+        req.id = decoded.id;
+        console.log(req.id + 'fez a chamada');
+        next();
+    })
+};
+
+routes.get('/usuarios',verificaJWTUsuario, controllerUsuario.List);
 routes.get('/usuarios/:id', controllerUsuario.GetOne);
 routes.post('/usuarios', controllerUsuario.Create);
 routes.put('/usuarios/:id', controllerUsuario.Update);
 routes.delete('/usuarios/:id', controllerUsuario.Delete);
-routes.post('/login', controllerUsuario.Login);
+routes.post('/usuario/login', controllerUsuario.loginUsuario);
 
-routes.get('/instituicoes', controllerInstituicao.List);
+routes.get('/instituicoes', verificaJWTInstituicao,controllerInstituicao.List);
 routes.get('/instituicoes/:id', controllerInstituicao.GetOne);
 routes.post('/instituicoes', controllerInstituicao.Create);
 routes.put('/instituicoes/:id', controllerInstituicao.Update);
-routes.delete('/instituicoes/:id', controllerUsuario.Delete);
+routes.delete('/instituicoes/:id', controllerInstituicao.Delete);
+routes.post('/instituicao/login', controllerInstituicao.loginInstituicao);
 
 module.exports = routes;
