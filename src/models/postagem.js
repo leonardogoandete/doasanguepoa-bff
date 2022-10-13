@@ -15,7 +15,7 @@ Postagem.init(
         },
         mensagem:
         {
-            type: sequelize.STRING,
+            type: sequelize.TEXT,
             allowNull: false,
         },
     },
