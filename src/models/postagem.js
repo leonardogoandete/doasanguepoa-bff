@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const database = require('../db.js');
+const Instituicao = require('./instituicoes');
 
 class Postagem extends sequelize.Model { }
 
@@ -23,5 +24,14 @@ Postagem.init(
         sequelize: database, modelName: 'postagem'
     }
 )
+Postagem.belongsTo(Instituicao, {
+    constraints: true,
+    foreignKey: 'idInstituicao'
+})
+
+Instituicao.hasMany(Postagem, {
+    foreignKey: 'idInstituicao'
+})
+
 
 module.exports = Postagem;

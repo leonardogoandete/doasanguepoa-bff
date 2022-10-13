@@ -1,8 +1,9 @@
 const { request } = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const ModelPostagem = require('../models/postagem');
-
+const ModelPostagem = require('../models/postagem.js');
+const ModelInstituicao = require('../models/instituicoes.js');
+const db = require('../db.js');
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -15,7 +16,20 @@ const List = async(req, res) => {
         }
     };
 
+const GetOne = async(req, res) => {
+    try {
+        const postagem = await ModelPostagem.findByPk(req.params.id);
+        const instituicao = await ModelInstituicao.findByPk(postagem.idInstituicao);
+        //return res.json(usu);
+        return res.send("<p>Instituicao:" + instituicao.nome + "<br>Mensagem: " + postagem.mensagem + "</p>");
+
+    } catch (erro) {
+        return console.error("Erro na Update : ", erro);
+    }
+};
+
 const Create = async(req, res) => {
+    //await db.sync({ force: true });
     //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
 	//Quais são os métodos que a conexão pode realizar na API
@@ -25,6 +39,7 @@ const Create = async(req, res) => {
         const postagem = await ModelPostagem.create(
             {
                 mensagem: req.body.mensagem,
+                idInstituicao: req.body.idInstituicao,
                 DataCriacao: date = new Date(),
                 DataAtualizacao: null
             }
@@ -82,7 +97,7 @@ module.exports = {
     List,
     Create,
     Update,
-    //GetOne,
+    GetOne,
     Delete,
     //loginUsuario
 }

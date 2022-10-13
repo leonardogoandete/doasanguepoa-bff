@@ -46,6 +46,7 @@ routes.delete('/instituicoes/:id', controllerInstituicao.Delete);
 routes.post('/instituicao/login', controllerInstituicao.loginInstituicao);
 
 routes.get('/postagem/', controllerPostagem.List); 
-routes.post('/postagem/', controllerPostagem.Create);
+routes.get('/postagem/:id', controllerPostagem.GetOne);
+routes.post('/postagem/', verificaJWTInstituicao, controllerPostagem.Create);
 
 module.exports = routes;
