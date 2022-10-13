@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const ModelPostagem = require('../models/postagem.js');
 const ModelInstituicao = require('../models/instituicoes.js');
 const db = require('../db.js');
+
+
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -16,17 +18,19 @@ const List = async(req, res) => {
         }
     };
 
+// pesquisa a mensagem e mostra o dono
 const GetOne = async(req, res) => {
     try {
-        const postagem = await ModelPostagem.findByPk(req.params.id);
-        const instituicao = await ModelInstituicao.findByPk(postagem.idInstituicao);
-        //return res.json(usu);
-        return res.send("<p>Instituicao:" + instituicao.nome + "<br>Mensagem: " + postagem.mensagem + "</p>");
-
+        const postagem = await ModelPostagem.findByPk(req.params.id, { include: ModelInstituicao });
+        return res.json(postagem);
     } catch (erro) {
         return console.error("Erro na Update : ", erro);
     }
 };
+
+//procura o dono e mostra as postagens
+//const instituicao = await ModelInstituicao.findByPk(req.params.id, { include: Postagem });
+/////////////
 
 const Create = async(req, res) => {
     //await db.sync({ force: true });
