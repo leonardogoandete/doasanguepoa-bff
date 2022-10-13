@@ -21,7 +21,7 @@ Postagem.init(
         },
     },
     {
-        sequelize: database, modelName: 'postagem'
+        sequelize: database, modelName: 'postagens'
     }
 )
 Postagem.belongsTo(Instituicao, {
