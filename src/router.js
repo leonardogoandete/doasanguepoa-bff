@@ -2,6 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const controllerUsuario = require('./controllers/usuarioController.js');
 const controllerInstituicao = require('./controllers/instituicaoController.js');
+const controllerPostagem = require('./controllers/postagemController.js');
 const jwt = require('jsonwebtoken');
 
 const routes = express.Router();
@@ -43,5 +44,8 @@ routes.post('/instituicoes', controllerInstituicao.Create);
 routes.put('/instituicoes/:id', controllerInstituicao.Update);
 routes.delete('/instituicoes/:id', controllerInstituicao.Delete);
 routes.post('/instituicao/login', controllerInstituicao.loginInstituicao);
+
+routes.get('/postagem/', controllerPostagem.List); 
+routes.post('/postagem/', controllerPostagem.Create);
 
 module.exports = routes;
