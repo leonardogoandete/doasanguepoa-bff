@@ -1,15 +1,13 @@
 const { request } = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const ModelPostagem = require('../models/postagem.js');
 const ModelInstituicao = require('../models/instituicoes.js');
-const db = require('../db.js');
-
 
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
+            // Exibe todos os posts com suas intituicoes
+            //const postagem = await ModelPostagem.findAll({ include: ModelInstituicao });
             const postagem = await ModelPostagem.findAll();
             return res.json(postagem);
 
@@ -22,7 +20,7 @@ const List = async(req, res) => {
 const GetOne = async(req, res) => {
     try {
         const postagem = await ModelPostagem.findByPk(req.params.id, { include: ModelInstituicao });
-        return res.json(postagem);
+        return res.json({"Instituicao": postagem.instituico.nome, "mensagem": postagem.mensagem});
     } catch (erro) {
         return console.error("Erro na Update : ", erro);
     }
@@ -59,8 +57,8 @@ const Update = async(req, res) => {
         try {
             const postagem = await ModelPostagem.findByPk(req.params.id);
             if (postagem) {
-                postagem.mensagem = req.body.nome;
-                postagem.DataAtualizacao = new Date();
+                postagem.mensagem = req.body.mensagem;
+                postagem.updatedAt = new Date();
                 await postagem.save();
             }
 
@@ -70,20 +68,7 @@ const Update = async(req, res) => {
             return console.error("Erro na Update : ", erro);
         }
     };
-/*
-const GetOne = async(req, res) => {
-        try {
 
-            const usu = await ModelPostagem.findByPk(req.params.id);
-
-            //return res.json(usu);
-            return res.send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>");
-
-        } catch (erro) {
-            return console.error("Erro na Update : ", erro);
-        }
-    };
-*/
 const Delete = async(req, res) => {
     res.header("Access-Control-Allow-Methods", 'DELETE');
         try {
@@ -103,5 +88,4 @@ module.exports = {
     Update,
     GetOne,
     Delete,
-    //loginUsuario
 }

@@ -48,5 +48,6 @@ routes.post('/instituicao/login', controllerInstituicao.loginInstituicao);
 routes.get('/postagens/', controllerPostagem.List); 
 routes.get('/postagens/:id', controllerPostagem.GetOne);
 routes.post('/postagens/', verificaJWTInstituicao, controllerPostagem.Create);
+routes.put('/postagens/:id', verificaJWTInstituicao, controllerPostagem.Update);
 
 module.exports = routes;
