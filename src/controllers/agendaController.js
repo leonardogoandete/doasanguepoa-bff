@@ -2,7 +2,7 @@ const { request } = require('express');
 const ModelAgenda = require('../models/agenda.js');
 const ehDiaUtil = require('@lfreneda/eh-dia-util');
 const estado = "RS";
-
+const horasValidas = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
 const List = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -43,8 +43,7 @@ const Agendar = async(req, res) =>{
     try {
         const {dia, hora} = req.body;
         const reserva = await ModelAgenda.findOne({ where: {dia: dia, hora: hora } });
-        console.log(reserva);
-        if(!reserva == null && ehDiaUtil(dia,estado) == true){
+        if(!reserva && ehDiaUtil(dia,estado) == true && horasValidas.includes(hora) == true){
             const agendar = await ModelAgenda.create(
                 {
                     dia: dia,
@@ -55,6 +54,8 @@ const Agendar = async(req, res) =>{
                 }
             );
             return res.json(agendar);
+        }else if(!horasValidas.includes(hora)){
+            return res.json({"erro":"Horario invalido"});   
         }else if(!ehDiaUtil(dia,estado)){
             return res.json({"erro":"Dia nao eh util"});   
         }else{
