@@ -3,6 +3,7 @@ const express = require('express');
 const controllerUsuario = require('./controllers/usuarioController.js');
 const controllerInstituicao = require('./controllers/instituicaoController.js');
 const controllerPostagem = require('./controllers/postagemController.js');
+const controllerAgenda = require('./controllers/agendaController.js');
 const jwt = require('jsonwebtoken');
 
 const routes = express.Router();
@@ -49,5 +50,9 @@ routes.get('/postagens/', controllerPostagem.List);
 routes.get('/postagens/:id', controllerPostagem.GetOne);
 routes.post('/postagens/', verificaJWTInstituicao, controllerPostagem.Create);
 routes.put('/postagens/:id', verificaJWTInstituicao, controllerPostagem.Update);
+
+routes.get('/agendamento/', controllerAgenda.List);
+routes.post('/agendar/', controllerAgenda.Agendar);
+//routes.put('/agendar/', controllerAgenda.ListaData);
 
 module.exports = routes;
