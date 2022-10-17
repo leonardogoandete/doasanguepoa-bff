@@ -32,27 +32,27 @@ function verificaJWTInstituicao(req, res, next) {
     })
 };
 
-routes.get('/usuarios',verificaJWTUsuario, controllerUsuario.List);
-routes.get('/usuarios/:id', controllerUsuario.GetOne);
-routes.post('/usuarios', controllerUsuario.Create);
-routes.put('/usuarios/:id', controllerUsuario.Update);
-routes.delete('/usuarios/:id', controllerUsuario.Delete);
-routes.post('/usuario/login', controllerUsuario.loginUsuario);
+routes.get('v1/api/usuarios',verificaJWTUsuario, controllerUsuario.List);
+routes.get('v1/api/usuarios/:id', controllerUsuario.GetOne);
+routes.post('v1/api/usuarios', controllerUsuario.Create);
+routes.put('v1/api/usuarios/:id', controllerUsuario.Update);
+routes.delete('v1/api/usuarios/:id', controllerUsuario.Delete);
+routes.post('v1/api/usuarios/login', controllerUsuario.loginUsuario);
 
-routes.get('/instituicoes', verificaJWTInstituicao,controllerInstituicao.List);
-routes.get('/instituicoes/:id', controllerInstituicao.GetOne);
-routes.post('/instituicoes', controllerInstituicao.Create);
-routes.put('/instituicoes/:id', controllerInstituicao.Update);
-routes.delete('/instituicoes/:id', controllerInstituicao.Delete);
-routes.post('/instituicao/login', controllerInstituicao.loginInstituicao);
+routes.get('v1/api/instituicoes', verificaJWTInstituicao,controllerInstituicao.List);
+routes.get('v1/api/instituicoes/:id', controllerInstituicao.GetOne);
+routes.post('v1/api/instituicoes', controllerInstituicao.Create);
+routes.put('v1/api/instituicoes/:id', controllerInstituicao.Update);
+routes.delete('v1/api/instituicoes/:id', controllerInstituicao.Delete);
+routes.post('v1/api/instituicoes/login', controllerInstituicao.loginInstituicao);
 
-routes.get('/postagens/', controllerPostagem.List); 
-routes.get('/postagens/:id', controllerPostagem.GetOne);
-routes.post('/postagens/', verificaJWTInstituicao, controllerPostagem.Create);
-routes.put('/postagens/:id', verificaJWTInstituicao, controllerPostagem.Update);
+routes.get('v1/api/postagens/', controllerPostagem.List); 
+routes.get('v1/api/postagens/:id', controllerPostagem.GetOne);
+routes.post('v1/api/postagens/', verificaJWTInstituicao, controllerPostagem.Create);
+routes.put('v1/api/postagens/:id', verificaJWTInstituicao, controllerPostagem.Update);
 
-routes.get('/agendamento/', controllerAgenda.List);
-routes.post('/agendar/', controllerAgenda.Agendar);
-//routes.put('/agendar/', controllerAgenda.ListaData);
+routes.get('v1/api/agendamento/', controllerAgenda.List);
+routes.post('v1/api/agendamento/', controllerAgenda.Agendar);
+//routes.put('/v1/api/agendamento', controllerAgenda.ListaData);
 
 module.exports = routes;
