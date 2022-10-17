@@ -112,8 +112,7 @@ if (!cpf) {
 
   try {
     const token = jwt.sign({id: user.id}, process.env.SECRET_USUARIO, { expiresIn: 300 }) // 300 = 5 minuto
-    res.cookie("jwt", token, { maxAge: 300, httpOnly: true });
-    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
+    res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ msg: error });
   }

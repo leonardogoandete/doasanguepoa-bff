@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require("morgan");
 const path = require('path')
 const rfs = require('rotating-file-stream')
+const cors = require('cors')
 
 
 // create a rotating write stream
@@ -18,6 +19,7 @@ var accessLogStream = rfs.createStream('access.log', {
 app.listen(port, () => {
     console.info(`Listening on http://localhost:${port}`);
 });
+app.use(cors())
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(routes);
