@@ -1,19 +1,23 @@
 const { request } = require('express');
 const ModelAgenda = require('../models/agenda.js');
+const ModelInstituicao = require('../models/instituicoes.js');
 const ehDiaUtil = require('@lfreneda/eh-dia-util');
 const estado = "RS";
 const horasValidas = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
+
 const List = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     try {
-        const agenda = await ModelAgenda.findAll();
+        const agenda = await ModelAgenda.findAll({ include: ModelInstituicao });
         return res.json(agenda);
+        //fazer factory aqui se der
 
     } catch (error) {
         return console.error("Erro em listar agendamento : ", error);
     }
 };
+
 /*
 const ListaData = async(req, res) => {
     const {hora} = req.body;

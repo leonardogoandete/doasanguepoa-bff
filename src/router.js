@@ -51,8 +51,8 @@ routes.get('/v1/api/postagens/:id', controllerPostagem.GetOne);
 routes.post('/v1/api/postagens/', verificaJWTInstituicao, controllerPostagem.Create);
 routes.put('/v1/api/postagens/:id', verificaJWTInstituicao, controllerPostagem.Update);
 
-routes.get('/v1/api/agendamento/', controllerAgenda.List);
-routes.post('/v1/api/agendamento/', controllerAgenda.Agendar);
-//routes.put('/v1/api/agendamento', controllerAgenda.ListaData);
+routes.get('/v1/api/agendamentos/', controllerAgenda.List);
+routes.post('/v1/api/agendamentos/', controllerAgenda.Agendar);
+
 
 module.exports = routes;

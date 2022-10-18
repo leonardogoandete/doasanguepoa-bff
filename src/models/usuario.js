@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const database = require('../db.js');
+const Agenda = require('./agenda.js');
 
 class Usuario extends sequelize.Model { }
 
@@ -14,6 +15,16 @@ Usuario.init(
             primaryKey: true
         },
         nome:
+        {
+            type: sequelize.STRING,
+            allowNull: false,
+        },
+        sobrenome:
+        {
+            type: sequelize.STRING,
+            allowNull: false,
+        },
+        endereco:
         {
             type: sequelize.STRING,
             allowNull: false,
@@ -41,5 +52,15 @@ Usuario.init(
         sequelize: database, modelName: 'usuarios'
     }
 )
+
+Agenda.belongsTo(Usuario, {
+    constraints: true,
+    foreignKey: 'idUsuario'
+})
+
+Usuario.hasMany(Agenda, {
+    constraints: true,
+    foreignKey: 'idUsuario'
+})
 
 module.exports = Usuario;

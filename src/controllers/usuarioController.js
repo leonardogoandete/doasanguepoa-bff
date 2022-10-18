@@ -27,6 +27,8 @@ const Create = async(req, res) => {
             {
                //Codigo: req.body.Codigo, // Comentado para gerar automatico
                 nome: req.body.nome,
+                sobrenome: req.body.sobrenome,
+                endereco: req.body.endereco,
                 cpf: req.body.cpf,
                 email: req.body.email,
                 senha: senhaCriptografada,

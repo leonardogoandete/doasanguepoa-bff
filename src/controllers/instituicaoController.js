@@ -30,12 +30,15 @@ const Create = async(req, res) => {
                    //Codigo: req.body.Codigo, // Comentado para gerar automatico
                     nome: req.body.nome,
                     cnpj: req.body.cnpj,
+                    endereco: req.body.endereco,
+                    telefone: req.body.telefone,
                     email: req.body.email,
                     senha: senhaCriptografada,
                     DataCriacao: date = new Date(),
                     DataAtualizacao: null
                 }
             );
+            console.log(instituicoes.telefone)
             return res.json(instituicoes);
 
         } catch (erro) {
