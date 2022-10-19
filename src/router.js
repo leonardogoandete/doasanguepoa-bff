@@ -15,7 +15,7 @@ routes.get('/', (req, res) => {
 function verificaJWTUsuario(req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.SECRET_USUARIO, (err, decoded) => {
-        if (err) return res.status(401).json({ message: "Usuario ão autenticado"});
+        if (err) return res.status(401).json({ message: "Usuario não autenticado"});
         next();
     })
 };
