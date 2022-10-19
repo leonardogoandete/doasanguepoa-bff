@@ -8,7 +8,7 @@ const List = async(req, res) => {
         try {
 
             const postagem = await ModelPostagem.findAll( { 
-                attributes:  ['mensagem'],
+                attributes:  ['id','mensagem'],
                 include: [ {model: ModelInstituicao, attributes: ['nome'] }]         
              });
             return res.json( postagem );
