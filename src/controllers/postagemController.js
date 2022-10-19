@@ -6,10 +6,12 @@ const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-            // Exibe todos os posts com suas intituicoes
-            //const postagem = await ModelPostagem.findAll({ include: ModelInstituicao });
-            const postagem = await ModelPostagem.findAll();
-            return res.json(postagem);
+
+            const postagem = await ModelPostagem.findAll( { 
+                attributes:  ['mensagem'],
+                include: [ {model: ModelInstituicao, attributes: ['nome'] }]         
+             });
+            return res.json( postagem );
 
         } catch (erro) {
             return console.error("Erro na List : ", erro);
