@@ -7,11 +7,10 @@ const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-            const usuarios = await ModelUsuario.findAll();
-            return res.json(usuarios);
-
+            const usuarios = await ModelUsuario.findAll()
+            .then((usuarios) => res.json(usuarios));
         } catch (erro) {
-            return console.error("Erro na List : ", erro);
+            return console.error("Erro na listagem de usuarios : ", erro);
         }
     };
 
@@ -35,11 +34,9 @@ const Create = async(req, res) => {
                 DataCriacao: date = new Date(),
                 DataAtualizacao: null
             }
-        );
-            return res.json(usuarios);
-
+        ).then((usuarios) => res.json(usuarios));
         } catch (erro) {
-            return console.error("Erro na Create : ", erro);
+            return console.error("Erro na Create() usuarios : ", erro);
         }
     };
 
@@ -49,26 +46,28 @@ const Update = async(req, res) => {
             if (usu) {
                 usu.nome = req.body.nome;
                 usu.DataAtualizacao = new Date();
-                await usu.save();
+                await usu.save()
+                .then((usu) => res.status(200).json(usu.nome));
             }
 
             return res.json(usu);
 
         } catch (erro) {
-            return console.error("Erro na Update : ", erro);
+            return console.error("Erro na Update() usuario : ", erro);
         }
     };
 
 const GetOne = async(req, res) => {
         try {
 
-            const usu = await ModelUsuario.findByPk(req.params.id);
+            const usu = await ModelUsuario.findByPk(req.params.id)
+            .then((usu) => res.status(200).send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>"));
 
             //return res.json(usu);
-            return res.send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>");
+            //return res.send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>");
 
         } catch (erro) {
-            return console.error("Erro na Update : ", erro);
+            return console.error("Erro na GetOne() usuario : ", erro);
         }
     };
 
@@ -77,8 +76,9 @@ const Delete = async(req, res) => {
         try {
 
             const usu = await ModelUsuario.findByPk(req.params.id);
-            await usu.destroy();
-            return res.json(usu);
+            await usu.destroy()
+            .then((usu) => res.status(200).json(usu.nome));
+            //return res.json(usu);
 
         } catch (erro) {
             return console.error("Erro na Update : ", erro);

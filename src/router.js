@@ -16,8 +16,6 @@ function verificaJWTUsuario(req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.SECRET_USUARIO, (err, decoded) => {
         if (err) return res.status(401).json({ message: "Usuario ão autenticado"});
-        req.id = decoded.id;
-        console.log(req.id + 'fez a chamada');
         next();
     })
 };
@@ -26,8 +24,6 @@ function verificaJWTInstituicao(req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.SECRET_INSTITUICAO, (err, decoded) => {
         if (err) return res.status(401).json({ message: "Instituicao não autenticada"});
-        req.id = decoded.id;
-        console.log(req.id + 'fez a chamada');
         next();
     })
 };
