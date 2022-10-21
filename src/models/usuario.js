@@ -19,11 +19,6 @@ Usuario.init(
             type: sequelize.STRING,
             allowNull: false,
         },
-        sobrenome:
-        {
-            type: sequelize.STRING,
-            allowNull: false,
-        },
         endereco:
         {
             type: sequelize.STRING,
