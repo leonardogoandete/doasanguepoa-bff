@@ -1,17 +1,18 @@
 const { request } = require('express');
 const ModelPostagem = require('../models/postagem.js');
 const ModelInstituicao = require('../models/instituicoes.js');
+//const Postagem = require('../models/postagem.js');
 
 const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-
             const postagem = await ModelPostagem.findAll( { 
                 attributes:  ['id','mensagem'],
                 include: [ {model: ModelInstituicao, attributes: ['nome'] }]         
              });
-            return res.json( postagem );
+             console.log(postagem)
+             return res.json(postagem)
 
         } catch (erro) {
             return console.error("Erro na List : ", erro);
