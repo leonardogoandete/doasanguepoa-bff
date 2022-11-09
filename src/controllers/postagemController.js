@@ -7,8 +7,11 @@ const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-            const postagem = await ModelPostagem.findAll( { 
+            const postagem = await ModelPostagem.findAll({ 
                 attributes:  ['id','mensagem'],
+                order: [
+                    ['id', 'DESC']
+                ],
                 include: [ {model: ModelInstituicao, attributes: ['nome'] }]         
              });
              console.log(postagem)
