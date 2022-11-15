@@ -18,28 +18,6 @@ const List = async(req, res) => {
     }
 };
 
-/*
-const ListaData = async(req, res) => {
-    const {hora} = req.body;
-    try {
-        //const data = await ModelAgenda.findOne();
-        const data = await ModelAgenda.findOne();
-
-        return res.json(data);
-        
-    } catch (error) {
-        return console.error("Erro em listar agendamento : ", error);
-    }
-};
-
-//payload
-/*
-{
-  "dias" : "2022/03/04",
-  "horario": ["{09:00,false,null}","{10:00,false,null}","{11:00,false,null}"]
-}
-*/
-
 const Agendar = async(req, res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -74,6 +52,5 @@ const Agendar = async(req, res) =>{
 
 module.exports = {
     List,
-    Agendar,
-    //ListaData
+    Agendar
 }
