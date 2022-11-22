@@ -35,7 +35,7 @@ routes.put('/v1/api/usuarios/:id', controllerUsuario.Update);
 routes.delete('/v1/api/usuarios/:id', controllerUsuario.Delete);
 routes.post('/v1/api/usuarios/login', controllerUsuario.loginUsuario);
 
-routes.get('/v1/api/instituicoes', verificaJWTInstituicao,controllerInstituicao.List);
+routes.get('/v1/api/instituicoes', controllerInstituicao.List);
 routes.get('/v1/api/instituicoes/:id', controllerInstituicao.GetOne);
 routes.post('/v1/api/instituicoes', controllerInstituicao.Create);
 routes.put('/v1/api/instituicoes/:id', controllerInstituicao.Update);
