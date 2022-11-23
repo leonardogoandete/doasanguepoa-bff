@@ -115,7 +115,7 @@ const Delete = async(req, res) => {
           }
         
           try {
-            const token = jwt.sign({id: instituicao.id}, process.env.SECRET_INSTITUICAO, { expiresIn: 43200 }) // 43200 = 720 minutos ou 12 Horas
+            const token = jwt.sign({id: instituicao.id, role: instituicao.role}, process.env.SECRET_INSTITUICAO, { expiresIn: 43200 }) // 43200 = 720 minutos ou 12 Horas
             res.cookie("jwt", token, { maxAge: 300, httpOnly: true });
             res.status(200).json({ msg: "Autenticação realizada com sucesso!", token });
           } catch (error) {

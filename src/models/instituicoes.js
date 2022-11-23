@@ -44,6 +44,12 @@ Instituicao.init(
             type: sequelize.STRING,
             allowNull: false,
         },
+        role:
+        {
+            type: sequelize.STRING,
+            allowNull: false,
+            defaultValue: "instituicao", 
+        }
     },
     {
         sequelize: database, modelName: 'instituicoes'

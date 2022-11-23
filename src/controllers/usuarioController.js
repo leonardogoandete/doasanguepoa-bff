@@ -112,7 +112,8 @@ if (!cpf) {
   }
 
   try {
-    const token = jwt.sign({id: user.id}, process.env.SECRET_USUARIO, { expiresIn: 43200 }) // 43200 = 720 minutos ou 12 Horas
+    console.log(user)
+    const token = jwt.sign({id: user.id, role: user.role}, process.env.SECRET_USUARIO, { expiresIn: 43200 }) // 43200 = 720 minutos ou 12 Horas
     res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ msg: error });
