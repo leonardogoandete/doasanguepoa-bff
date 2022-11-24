@@ -35,13 +35,13 @@ const Agendar = async(req, res) =>{
                     status: true
                 }
             );
-            return res.json(agendar);
+            return res.send("Agendado com sucesso").status(200);
         }else if(!horasValidas.includes(hora)){
-            return res.json({"erro":"Horario invalido"});   
+            return res.send("Horario invalido").status(400);   
         }else if(!ehDiaUtil(dia,estado)){
-            return res.json({"erro":"Dia nao eh util"});   
+            return res.send("Dia nao eh util").status(400);   
         }else{
-            return res.json({"erro":"Horario ja agendado"});
+            return res.send("Horario ja agendado").status(400)
         }
     } catch (error) {
         return console.error("Erro no agendamento : " + error.message).status(400);
