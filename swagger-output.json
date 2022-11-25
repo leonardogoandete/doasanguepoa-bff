@@ -23,8 +23,8 @@
       "description": "Endpoint de instituições"
     },
     {
-      "name": "Post",
-      "description": "Endpoint de posts"
+      "name": "Postagem",
+      "description": "Endpoint de postagens"
     },
     {
       "name": "Agendamento",
@@ -403,7 +403,7 @@
     "/postagens": {
       "get": {
         "tags": [
-          "Post"
+          "Postagem"
         ],
         "summary": "Exibe todas as informações das postagem",
         "description": "Lista todas as postagens",
@@ -416,7 +416,7 @@
       },
       "post": {
         "tags": [
-          "Post"
+          "Postagem"
         ],
         "summary": "Insere uma nova postagem",
         "parameters": [
@@ -454,7 +454,7 @@
     "/postagens/{id}": {
       "get": {
         "tags": [
-          "Post"
+          "Postagem"
         ],
         "summary": "Exibe todas as informações de uma postagem por ID",
         "parameters": [
