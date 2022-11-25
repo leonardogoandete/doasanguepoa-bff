@@ -12,7 +12,7 @@ const List = async(req, res) => {
         const agenda = await ModelAgenda.findAll({ 
             include: [{
                 model: ModelInstituicao,
-                attributes: {exclude: ['senha']}
+                attributes: {exclude: ['id','senha']}
                 }], 
             attributes:{exclude: ['senha']} });
         return res.json(agenda);
