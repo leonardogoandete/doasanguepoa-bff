@@ -1,28 +1,17 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.1",
   "info": {
-    "version": "1.0.0",
     "title": "Doa Sangue POA",
-    "description": "Documentação da API doasanguepoa"
+    "description": "Documentação da API doasanguepoa",
+    "version": "1.0.0"
   },
-  "host": "doasanguepoa-bff.herokuapp.com",
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "securityDefinitions": {
-    "apiKeyAuth": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "X-API-KEY",
-      "description": "any description..."
+  "servers": [
+    {
+      "url": "http://doasanguepoa-bff.herokuapp.com/v1/api"
+    },
+    {
+      "url": "https://doasanguepoa-bff.herokuapp.com/v1/api"
     }
-  },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
   ],
   "tags": [
     {
@@ -46,33 +35,36 @@
     "/": {
       "get": {
         "description": "Restorna se o status do servidor está UP",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       }
     },
-    "/v1/api/usuarios": {
+    "/usuarios": {
       "get": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
         "parameters": [
           {
             "name": "x-access-token",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {}
           }
         }
       },
@@ -80,57 +72,66 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "senha": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "endereco": {
-                  "example": "any"
-                },
-                "cpf": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "senha": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "nome": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "endereco": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "cpf": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "email": {
+                    "type": "object",
+                    "example": "any"
+                  }
                 }
               }
             }
-          }
-        ],
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     },
-    "/v1/api/usuarios/{id}": {
+    "/usuarios/{id}": {
       "get": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       },
@@ -138,102 +139,118 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/v1/api/usuarios/login": {
-      "post": {
-        "tags": [
-          "Usuario"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "cpf": {
-                  "example": "any"
-                },
-                "senha": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "OK",
+            "content": {}
           }
         }
       }
     },
-    "/v1/api/instituicoes": {
+    "/usuarios/login": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "senha": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/instituicoes": {
       "get": {
         "tags": [
           "Instituicao"
         ],
         "description": "Lista todas as instituições",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       },
@@ -242,43 +259,52 @@
           "Instituicao"
         ],
         "description": "Insere uma instituição",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "senha": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "cnpj": {
-                  "example": "any"
-                },
-                "endereco": {
-                  "example": "any"
-                },
-                "telefone": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "senha": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "nome": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "cnpj": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "endereco": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "telefone": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "email": {
+                    "type": "object",
+                    "example": "any"
+                  }
                 }
               }
             }
-          }
-        ],
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     },
-    "/v1/api/instituicoes/{id}": {
+    "/instituicoes/{id}": {
       "get": {
         "tags": [
           "Instituicao"
@@ -289,12 +315,15 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       },
@@ -302,32 +331,39 @@
         "tags": [
           "Instituicao"
         ],
-        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "tags": [
@@ -339,65 +375,75 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/v1/api/instituicoes/login": {
-      "post": {
-        "tags": [
-          "Instituicao"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "cnpj": {
-                  "example": "any"
-                },
-                "senha": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "OK",
+            "content": {}
           }
         }
       }
     },
-    "/v1/api/postagens/": {
+    "/instituicoes/login": {
+      "post": {
+        "tags": [
+          "Instituicao"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cnpj": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "senha": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/postagens/": {
       "get": {
         "tags": [
           "Post"
         ],
         "description": "Lista todas as postagens",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       },
@@ -410,35 +456,45 @@
           {
             "name": "x-access-token",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "mensagem": {
-                  "example": "any"
-                },
-                "idInstituicao": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mensagem": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "idInstituicao": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     },
-    "/v1/api/postagens/{id}": {
+    "/postagens/{id}": {
       "get": {
         "tags": [
           "Post"
@@ -449,26 +505,29 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       }
     },
-    "/v1/api/agendamentos/": {
+    "/agendamentos/": {
       "get": {
         "tags": [
           "Agendamento"
         ],
         "description": "Lista todos os agendamentos",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           }
         }
       },
@@ -481,128 +540,150 @@
           {
             "name": "x-access-token",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "idInstituicao": {
-                  "example": "any"
-                },
-                "idUsuario": {
-                  "example": "any"
-                },
-                "dia": {
-                  "example": "any"
-                },
-                "hora": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idInstituicao": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "idUsuario": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "dia": {
+                    "type": "object",
+                    "example": "any"
+                  },
+                  "hora": {
+                    "type": "object",
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     }
   },
-  "definitions": {
-    "Usuario": {
-      "type": "object",
-      "properties": {
-        "nome": {
-          "type": "string",
-          "example": "Jhon Doe"
-        },
-        "endereco": {
-          "type": "string",
-          "example": "R. Cel. Vicente, 281 - Centro Histórico, Porto Alegre - RS, 90030-041"
-        },
-        "cpf": {
-          "type": "string",
-          "example": "12345678911"
-        },
-        "email": {
-          "type": "string",
-          "example": "jhon_doe@exemplo.com"
-        },
-        "senha": {
-          "type": "string",
-          "example": "senhasegura"
+  "components": {
+    "schemas": {
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Jhon Doe"
+          },
+          "endereco": {
+            "type": "string",
+            "example": "R. Cel. Vicente, 281 - Centro Histórico, Porto Alegre - RS, 90030-041"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "12345678911"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhon_doe@exemplo.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "senhasegura"
+          }
+        }
+      },
+      "Instituicao": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Hospital Porto Alegre"
+          },
+          "cnpj": {
+            "type": "string",
+            "example": "92831163000215"
+          },
+          "endereco": {
+            "type": "string",
+            "example": "R. Antônio Francisco da Rocha, 100 - Azenha, Porto Alegre - RS, 90050-010"
+          },
+          "telefone": {
+            "type": "string",
+            "example": "(51) 3221-6066"
+          },
+          "email": {
+            "type": "string",
+            "example": "hpoa@exemplo.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "senhasegura"
+          }
+        }
+      },
+      "Postagem": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "example": "Esta é uma mensagem de exemplo!"
+          },
+          "idInstituicao": {
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "Agendamento": {
+        "type": "object",
+        "properties": {
+          "dia": {
+            "type": "string",
+            "example": "2022/11/30"
+          },
+          "idInstituicao": {
+            "type": "number",
+            "example": 1
+          },
+          "hora": {
+            "type": "string",
+            "example": "08:00"
+          },
+          "idUsuario": {
+            "type": "number",
+            "example": 1
+          }
         }
       }
     },
-    "Instituicao": {
-      "type": "object",
-      "properties": {
-        "nome": {
-          "type": "string",
-          "example": "Hospital Porto Alegre"
-        },
-        "cnpj": {
-          "type": "string",
-          "example": "92831163000215"
-        },
-        "endereco": {
-          "type": "string",
-          "example": "R. Antônio Francisco da Rocha, 100 - Azenha, Porto Alegre - RS, 90050-010"
-        },
-        "telefone": {
-          "type": "string",
-          "example": "(51) 3221-6066"
-        },
-        "email": {
-          "type": "string",
-          "example": "hpoa@exemplo.com"
-        },
-        "senha": {
-          "type": "string",
-          "example": "senhasegura"
-        }
-      }
-    },
-    "Postagem": {
-      "type": "object",
-      "properties": {
-        "mensagem": {
-          "type": "string",
-          "example": "Esta é uma mensagem de exemplo!"
-        },
-        "idInstituicao": {
-          "type": "number",
-          "example": 1
-        }
-      }
-    },
-    "Agendamento": {
-      "type": "object",
-      "properties": {
-        "dia": {
-          "type": "string",
-          "example": "2022/11/30"
-        },
-        "idInstituicao": {
-          "type": "number",
-          "example": 1
-        },
-        "hora": {
-          "type": "string",
-          "example": "08:00"
-        },
-        "idUsuario": {
-          "type": "number",
-          "example": 1
-        }
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "description": "any description...",
+        "name": "X-API-KEY",
+        "in": "header"
       }
     }
   }
