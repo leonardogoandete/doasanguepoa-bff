@@ -34,7 +34,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "Restorna se o status do servidor está UP",
+        "summary": "Retorna o status do servidor",
         "responses": {
           "200": {
             "description": "OK",
@@ -48,6 +48,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Exibe todas as informações dos usuarios",
         "parameters": [
           {
             "name": "x-access-token",
@@ -72,6 +73,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Insere um novo Usuario",
         "requestBody": {
           "content": {
             "application/json": {
@@ -118,6 +120,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Exibe todas as informações do usuário por ID",
         "parameters": [
           {
             "name": "id",
@@ -139,6 +142,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Atualiza informações do usuário por ID",
         "parameters": [
           {
             "name": "id",
@@ -177,6 +181,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Deleta um usuário por ID",
         "parameters": [
           {
             "name": "id",
@@ -200,6 +205,7 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Autenticação de um usuário",
         "requestBody": {
           "content": {
             "application/json": {
@@ -246,7 +252,7 @@
         "tags": [
           "Instituicao"
         ],
-        "description": "Lista todas as instituições",
+        "summary": "Exibe todas as informações das Instituições",
         "responses": {
           "200": {
             "description": "OK",
@@ -258,7 +264,7 @@
         "tags": [
           "Instituicao"
         ],
-        "description": "Insere uma instituição",
+        "summary": "Insere uma nova Instituição",
         "requestBody": {
           "content": {
             "application/json": {
@@ -309,7 +315,7 @@
         "tags": [
           "Instituicao"
         ],
-        "description": "Lista informações de uma instituição",
+        "summary": "Exibe todas as informações das Instituições por ID",
         "parameters": [
           {
             "name": "id",
@@ -331,6 +337,7 @@
         "tags": [
           "Instituicao"
         ],
+        "summary": "Atualiza informações de uma Instituição por ID",
         "parameters": [
           {
             "name": "id",
@@ -369,7 +376,7 @@
         "tags": [
           "Instituicao"
         ],
-        "description": "Delete uma instituição",
+        "summary": "Deleta uma Instituição por ID",
         "parameters": [
           {
             "name": "id",
@@ -393,6 +400,7 @@
         "tags": [
           "Instituicao"
         ],
+        "summary": "Autenticação de uma Instituição",
         "requestBody": {
           "content": {
             "application/json": {
@@ -434,11 +442,12 @@
         "x-codegen-request-body-name": "body"
       }
     },
-    "/postagens/": {
+    "/postagens": {
       "get": {
         "tags": [
           "Post"
         ],
+        "summary": "Exibe todas as informações das postagem",
         "description": "Lista todas as postagens",
         "responses": {
           "200": {
@@ -451,7 +460,7 @@
         "tags": [
           "Post"
         ],
-        "description": "Insere uma postagem",
+        "summary": "Insere uma nova postagem",
         "parameters": [
           {
             "name": "x-access-token",
@@ -499,7 +508,7 @@
         "tags": [
           "Post"
         ],
-        "description": "Lista informações de uma postagem",
+        "summary": "Exibe todas as informações de uma postagem por ID",
         "parameters": [
           {
             "name": "id",
@@ -518,12 +527,12 @@
         }
       }
     },
-    "/agendamentos/": {
+    "/agendamentos": {
       "get": {
         "tags": [
           "Agendamento"
         ],
-        "description": "Lista todos os agendamentos",
+        "summary": "Exibe todas as informações dos agendamentos",
         "responses": {
           "200": {
             "description": "OK",
@@ -535,7 +544,7 @@
         "tags": [
           "Agendamento"
         ],
-        "description": "Insere um agendamento",
+        "summary": "Insere um novo agendamento",
         "parameters": [
           {
             "name": "x-access-token",
