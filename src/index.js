@@ -9,7 +9,9 @@ const path = require('path')
 const rfs = require('rotating-file-stream')
 const cors = require('cors')
 // const rescue = require('express-rescue') usar rescue para criar exceções tratadas
-
+const swaggerAutogen = require('swagger-autogen')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('../swagger-output.json')
 
 // create a rotating write stream
 var accessLogStream = rfs.createStream('access.log', {
@@ -30,7 +32,6 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(routes);
 app.use(cookieParser())
-
-
+app.use('/v1/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 

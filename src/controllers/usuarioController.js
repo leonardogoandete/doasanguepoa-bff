@@ -60,7 +60,11 @@ const GetOne = async(req, res) => {
         try {
 
             const usu = await ModelUsuario.findByPk(req.params.id)
-            .then((usu) => res.status(200).send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>"));
+            if(usu == null){
+                res.status(400).json({"Erro":"Usuario não existe"});
+            }else{
+                res.status(200).json(usu);
+            }
 
             //return res.json(usu);
             //return res.send("<p>Nome:" + usu.nome + "<br>CPF: " + usu.cpf + "</p>");
