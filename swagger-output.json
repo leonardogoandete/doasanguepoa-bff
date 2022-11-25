@@ -78,33 +78,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "senha": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "nome": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "endereco": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "cpf": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "email": {
-                    "type": "object",
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/Usuario"
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -127,7 +105,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -149,7 +128,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -159,9 +139,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nome": {
+                  "email": {
                     "type": "object",
-                    "example": "any"
+                    "example": "jonh@exemplo.com"
                   }
                 }
               }
@@ -188,7 +168,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -213,18 +194,18 @@
                 "type": "object",
                 "properties": {
                   "cpf": {
-                    "type": "object",
-                    "example": "any"
+                    "type": "integer",
+                    "example": 123456789
                   },
                   "senha": {
-                    "type": "object",
-                    "example": "any"
+                    "type": "string",
+                    "example": "laikalaika"
                   }
                 }
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -269,37 +250,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "senha": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "nome": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "cnpj": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "endereco": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "telefone": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "email": {
-                    "type": "object",
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/Instituicao"
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -322,7 +277,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -344,7 +300,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -354,9 +311,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nome": {
+                  "endereco": {
                     "type": "object",
-                    "example": "any"
+                    "example": "R. Antônio Francisco da Rocha, 100 - Azenha, Porto Alegre - RS, 90050-010"
                   }
                 }
               }
@@ -383,7 +340,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -407,19 +365,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cnpj": {
-                    "type": "object",
-                    "example": "any"
+                  "cpf": {
+                    "type": "integer",
+                    "example": 93712735000200
                   },
                   "senha": {
-                    "type": "object",
-                    "example": "any"
+                    "type": "string",
+                    "example": "hps"
                   }
                 }
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -474,21 +432,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "mensagem": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "idInstituicao": {
-                    "type": "object",
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/Postagem"
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -515,7 +463,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -558,29 +507,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "idInstituicao": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "idUsuario": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "dia": {
-                    "type": "object",
-                    "example": "any"
-                  },
-                  "hora": {
-                    "type": "object",
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/Agendamento"
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
