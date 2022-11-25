@@ -5,7 +5,7 @@
     "title": "Doa Sangue POA",
     "description": "Documentação da API doasanguepoa"
   },
-  "host": "",
+  "host": "doasanguepoa-bff.herokuapp.com",
   "basePath": "/",
   "schemes": ["http", "https"],
   "securityDefinitions": {
