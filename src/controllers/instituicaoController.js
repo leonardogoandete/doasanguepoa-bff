@@ -9,8 +9,7 @@ const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-            const instituicoes = await ModelInstituicao.findAll({ 
-                attributes:  ['id','nome','cnpj','endereco','telefone','email']});
+            const instituicoes = await ModelInstituicao.findAll({attributes: {exclude: ['senha']}});
             return res.json(instituicoes);
 
         } catch (erro) {
@@ -49,7 +48,7 @@ const Create = async(req, res) => {
 
 const Update = async(req, res) => {
         try {
-            const inst = await ModelInstituicao.findByPk(req.params.id);
+            const inst = await ModelInstituicao.findByPk(req.params.id, {attributes: {exclude: ['senha']}});
             if (inst) {
                 inst.nome = req.body.nome;
                 inst.DataAtualizacao = new Date();
@@ -66,7 +65,7 @@ const Update = async(req, res) => {
 const GetOne = async(req, res) => {
         try {
 
-            const inst = await ModelInstituicao.findByPk(req.params.id);
+            const inst = await ModelInstituicao.findByPk(req.params.id, {attributes: {exclude: ['senha']}});
 
             return res.json(inst);
 
@@ -78,7 +77,7 @@ const GetOne = async(req, res) => {
 const Delete = async(req, res) => {
         try {
 
-            const inst = await ModelInstituicao.findByPk(req.params.id);
+            const inst = await ModelInstituicao.findByPk(req.params.id, {attributes: {exclude: ['senha']}});
             await inst.destroy();
             return res.json(inst);
 

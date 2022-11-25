@@ -7,7 +7,7 @@ const List = async(req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         try {
-            const usuarios = await ModelUsuario.findAll()
+            const usuarios = await ModelUsuario.findAll({attributes: {exclude: ['senha']}})
             .then((usuarios) => res.json(usuarios));
         } catch (erro) {
             return console.error("Erro na listagem de usuarios : ", erro);
@@ -41,7 +41,7 @@ const Create = async(req, res) => {
 
 const Update = async(req, res) => {
         try {
-            const usu = await ModelUsuario.findByPk(req.params.id);
+            const usu = await ModelUsuario.findByPk(req.params.id, {attributes: {exclude: ['senha']}});
             if (usu) {
                 usu.nome = req.body.nome;
                 usu.DataAtualizacao = new Date();
@@ -59,7 +59,7 @@ const Update = async(req, res) => {
 const GetOne = async(req, res) => {
         try {
 
-            const usu = await ModelUsuario.findByPk(req.params.id)
+            const usu = await ModelUsuario.findByPk(req.params.id, {attributes: {exclude: ['senha']}})
             if(usu == null){
                 res.status(400).json({"Erro":"Usuario não existe"});
             }else{

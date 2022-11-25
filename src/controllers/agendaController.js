@@ -9,7 +9,12 @@ const List = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     try {
-        const agenda = await ModelAgenda.findAll({ include: ModelInstituicao });
+        const agenda = await ModelAgenda.findAll({ 
+            include: [{
+                model: ModelInstituicao,
+                attributes: {exclude: ['senha']}
+                }], 
+            attributes:{exclude: ['senha']} });
         return res.json(agenda);
         //fazer factory aqui se der
 
