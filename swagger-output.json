@@ -6,7 +6,10 @@
     "description": "Documentação da API doasanguepoa"
   },
   "host": "doasanguepoa-bff.herokuapp.com",
-  "schemes": ["http", "https"],
+  "schemes": [
+    "http",
+    "https"
+  ],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
@@ -21,7 +24,7 @@
   "produces": [
     "application/json"
   ],
-  "tags":[
+  "tags": [
     {
       "name": "Usuario",
       "description": "Endpoint de usuarios"
@@ -42,7 +45,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Restorna se o status do servidor está UP",
         "parameters": [],
         "responses": {
           "200": {
@@ -53,7 +56,9 @@
     },
     "/v1/api/usuarios": {
       "get": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -72,7 +77,9 @@
         }
       },
       "post": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -109,7 +116,9 @@
     },
     "/v1/api/usuarios/{id}": {
       "get": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -126,7 +135,9 @@
         }
       },
       "put": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -155,7 +166,9 @@
         }
       },
       "delete": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -174,7 +187,9 @@
     },
     "/v1/api/usuarios/login": {
       "post": {
-        "tags":["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -211,7 +226,9 @@
     },
     "/v1/api/instituicoes": {
       "get": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "Lista todas as instituições",
         "parameters": [],
         "responses": {
@@ -221,7 +238,9 @@
         }
       },
       "post": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "Insere uma instituição",
         "parameters": [
           {
@@ -261,7 +280,9 @@
     },
     "/v1/api/instituicoes/{id}": {
       "get": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "Lista informações de uma instituição",
         "parameters": [
           {
@@ -278,7 +299,9 @@
         }
       },
       "put": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "",
         "parameters": [
           {
@@ -307,7 +330,9 @@
         }
       },
       "delete": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "Delete uma instituição",
         "parameters": [
           {
@@ -326,7 +351,9 @@
     },
     "/v1/api/instituicoes/login": {
       "post": {
-        "tags":["Instituicao"],
+        "tags": [
+          "Instituicao"
+        ],
         "description": "",
         "parameters": [
           {
@@ -363,7 +390,9 @@
     },
     "/v1/api/postagens/": {
       "get": {
-        "tags":["Post"],
+        "tags": [
+          "Post"
+        ],
         "description": "Lista todas as postagens",
         "parameters": [],
         "responses": {
@@ -373,7 +402,9 @@
         }
       },
       "post": {
-        "tags":["Post"],
+        "tags": [
+          "Post"
+        ],
         "description": "Insere uma postagem",
         "parameters": [
           {
@@ -409,7 +440,9 @@
     },
     "/v1/api/postagens/{id}": {
       "get": {
-        "tags":["Post"],
+        "tags": [
+          "Post"
+        ],
         "description": "Lista informações de uma postagem",
         "parameters": [
           {
@@ -428,7 +461,9 @@
     },
     "/v1/api/agendamentos/": {
       "get": {
-        "tags":["Agendamento"],
+        "tags": [
+          "Agendamento"
+        ],
         "description": "Lista todos os agendamentos",
         "parameters": [],
         "responses": {
@@ -438,7 +473,9 @@
         }
       },
       "post": {
-        "tags":["Agendamento"],
+        "tags": [
+          "Agendamento"
+        ],
         "description": "Insere um agendamento",
         "parameters": [
           {
@@ -480,88 +517,93 @@
     }
   },
   "definitions": {
-    "Parents": {
+    "Usuario": {
       "type": "object",
       "properties": {
-        "father": {
-          "type": "string",
-          "example": "Simon Doe"
-        },
-        "mother": {
-          "type": "string",
-          "example": "Marie Doe"
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "name": {
+        "nome": {
           "type": "string",
           "example": "Jhon Doe"
         },
-        "age": {
-          "type": "number",
-          "example": 29
+        "endereco": {
+          "type": "string",
+          "example": "R. Cel. Vicente, 281 - Centro Histórico, Porto Alegre - RS, 90030-041"
         },
-        "parents": {
-          "$ref": "#/definitions/Parents"
+        "cpf": {
+          "type": "string",
+          "example": "12345678911"
         },
-        "diplomas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "school": {
-                "type": "string",
-                "example": "XYZ University"
-              },
-              "year": {
-                "type": "number",
-                "example": 2020
-              },
-              "completed": {
-                "type": "boolean",
-                "example": true
-              },
-              "internship": {
-                "type": "object",
-                "properties": {
-                  "hours": {
-                    "type": "number",
-                    "example": 290
-                  },
-                  "location": {
-                    "type": "string",
-                    "example": "XYZ Company"
-                  }
-                }
-              }
-            }
-          }
+        "email": {
+          "type": "string",
+          "example": "jhon_doe@exemplo.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "senhasegura"
         }
       }
     },
-    "AddUser": {
+    "Instituicao": {
       "type": "object",
       "properties": {
-        "name": {
+        "nome": {
           "type": "string",
-          "example": "Jhon Doe"
+          "example": "Hospital Porto Alegre"
         },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "about": {
+        "cnpj": {
           "type": "string",
-          "example": ""
+          "example": "92831163000215"
+        },
+        "endereco": {
+          "type": "string",
+          "example": "R. Antônio Francisco da Rocha, 100 - Azenha, Porto Alegre - RS, 90050-010"
+        },
+        "telefone": {
+          "type": "string",
+          "example": "(51) 3221-6066"
+        },
+        "email": {
+          "type": "string",
+          "example": "hpoa@exemplo.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "senhasegura"
         }
-      },
-      "required": [
-        "name",
-        "age"
-      ]
+      }
+    },
+    "Postagem": {
+      "type": "object",
+      "properties": {
+        "mensagem": {
+          "type": "string",
+          "example": "Esta é uma mensagem de exemplo!"
+        },
+        "idInstituicao": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "Agendamento": {
+      "type": "object",
+      "properties": {
+        "dia": {
+          "type": "string",
+          "example": "2022/11/30"
+        },
+        "idInstituicao": {
+          "type": "number",
+          "example": 1
+        },
+        "hora": {
+          "type": "string",
+          "example": "08:00"
+        },
+        "idUsuario": {
+          "type": "number",
+          "example": 1
+        }
+      }
     }
   }
 }
