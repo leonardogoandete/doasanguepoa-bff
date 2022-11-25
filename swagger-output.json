@@ -6,7 +6,6 @@
     "description": "Documentação da API doasanguepoa"
   },
   "host": "doasanguepoa-bff.herokuapp.com",
-  "basePath": "/",
   "schemes": ["http", "https"],
   "securityDefinitions": {
     "apiKeyAuth": {
