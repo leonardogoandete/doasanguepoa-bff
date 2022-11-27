@@ -139,9 +139,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
+                  "nome": {
                     "type": "object",
-                    "example": "jonh@exemplo.com"
+                    "example": "Laika Dias"
                   }
                 }
               }
@@ -311,9 +311,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "endereco": {
+                  "nome": {
                     "type": "object",
-                    "example": "R. Antônio Francisco da Rocha, 100 - Azenha, Porto Alegre - RS, 90050-010"
+                    "example": "Hospital Pronto Socorro"
                   }
                 }
               }
