@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
- res.json({'Status': 'UP', "Documentação da API":"http://doasanguepoa-bff.herokuapp.com/v1/api/docs"});   
+routes.get('/v1/api/status', (req, res) => {
+ res.json({'Status': 'UP', "Documentação da API":"https://doasanguepoa-bff-aharx.ondigitalocean.app/v1/api/docs/"});   
 });
 
 function verificaJWTUsuario(req, res, next) {

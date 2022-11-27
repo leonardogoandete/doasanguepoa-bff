@@ -32,7 +32,7 @@
     }
   ],
   "paths": {
-    "/": {
+    "/status": {
       "get": {
         "summary": "Retorna o status do servidor",
         "responses": {
