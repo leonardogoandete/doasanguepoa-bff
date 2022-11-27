@@ -194,8 +194,8 @@
                 "type": "object",
                 "properties": {
                   "cpf": {
-                    "type": "integer",
-                    "example": 123456789
+                    "type": "string",
+                    "example": "123456789"
                   },
                   "senha": {
                     "type": "string",
@@ -365,9 +365,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cpf": {
-                    "type": "integer",
-                    "example": 93712735000200
+                  "cnpj": {
+                    "type": "string",
+                    "example": "93712735000200"
                   },
                   "senha": {
                     "type": "string",
