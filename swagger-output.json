@@ -195,7 +195,7 @@
                 "properties": {
                   "cpf": {
                     "type": "string",
-                    "example": "123456789"
+                    "example": "12345678911"
                   },
                   "senha": {
                     "type": "string",
