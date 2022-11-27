@@ -7,10 +7,10 @@
   },
   "servers": [
     {
-      "url": "http://doasanguepoa-bff-aharx.ondigitalocean.app/v1/api"
+      "url": "https://doasanguepoa-bff-aharx.ondigitalocean.app/v1/api"
     },
     {
-      "url": "https://doasanguepoa-bff-aharx.ondigitalocean.app/v1/api"
+      "url": "http://doasanguepoa-bff-aharx.ondigitalocean.app/v1/api"
     }
   ],
   "tags": [
