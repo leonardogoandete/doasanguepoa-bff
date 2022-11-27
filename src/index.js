@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require("morgan");
 const path = require('path')
 const rfs = require('rotating-file-stream')
-const cors = require('cors')
+
 // const rescue = require('express-rescue') usar rescue para criar exceções tratadas
 const swaggerAutogen = require('swagger-autogen')
 const swaggerUi = require('swagger-ui-express')
@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.info(`Listening on http://localhost:${port}`);
 });
-app.use(cors())
+
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(routes);
