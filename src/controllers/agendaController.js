@@ -5,16 +5,19 @@ const ehDiaUtil = require('@lfreneda/eh-dia-util');
 const estado = "RS";
 const horasValidas = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
 
-const List = async(req, res) => {
+const List = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     try {
-        const agenda = await ModelAgenda.findAll({ 
+        const agenda = await ModelAgenda.findAll({
             include: [{
                 model: ModelInstituicao,
-                attributes: {exclude: ['id','senha']}
-                }], 
-            attributes:{exclude: ['senha']} });
+                attributes: { exclude: ['id', 'senha'] }
+            }],
+            attributes: { exclude: ['senha'] }
+        });
         return res.json(agenda);
         //fazer factory aqui se der
 
@@ -23,14 +26,16 @@ const List = async(req, res) => {
     }
 };
 
-const Agendar = async(req, res) =>{
+const Agendar = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
 
     try {
-        const {dia, hora} = req.body;
-        const reserva = await ModelAgenda.findOne({ where: {dia: dia, hora: hora } });
-        if(!reserva && ehDiaUtil(dia,estado) == true && horasValidas.includes(hora) == true){
+        const { dia, hora } = req.body;
+        const reserva = await ModelAgenda.findOne({ where: { dia: dia, hora: hora } });
+        if (!reserva && ehDiaUtil(dia, estado) == true && horasValidas.includes(hora) == true) {
             const agendar = await ModelAgenda.create(
                 {
                     dia: dia,
@@ -41,11 +46,11 @@ const Agendar = async(req, res) =>{
                 }
             );
             return res.send("Agendado com sucesso").status(200);
-        }else if(!horasValidas.includes(hora)){
-            return res.send("Horario invalido").status(400);   
-        }else if(!ehDiaUtil(dia,estado)){
-            return res.send("Dia nao eh util").status(400);   
-        }else{
+        } else if (!horasValidas.includes(hora)) {
+            return res.send("Horario invalido").status(400);
+        } else if (!ehDiaUtil(dia, estado)) {
+            return res.send("Dia nao eh util").status(400);
+        } else {
             return res.send("Horario ja agendado").status(400)
         }
     } catch (error) {

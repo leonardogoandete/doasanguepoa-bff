@@ -3,30 +3,36 @@ const ModelPostagem = require('../models/postagem.js');
 const ModelInstituicao = require('../models/instituicoes.js');
 //const Postagem = require('../models/postagem.js');
 
-const List = async(req, res) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        try {
-            const postagem = await ModelPostagem.findAll({ 
-                attributes:  ['id','mensagem'],
-                order: [
-                    ['id', 'DESC']
-                ],
-                include: [ {model: ModelInstituicao, attributes: ['nome'] }]         
-             });
-             console.log(postagem)
-             return res.json(postagem)
+const List = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    try {
+        const postagem = await ModelPostagem.findAll({
+            attributes: ['id', 'mensagem'],
+            order: [
+                ['id', 'DESC']
+            ],
+            include: [{ model: ModelInstituicao, attributes: ['nome'] }]
+        });
+        console.log(postagem)
+        return res.json(postagem)
 
-        } catch (erro) {
-            return console.error("Erro na List : ", erro);
-        }
-    };
+    } catch (erro) {
+        return console.error("Erro na List : ", erro);
+    }
+};
 
 // pesquisa a mensagem e mostra o dono
-const GetOne = async(req, res) => {
+const GetOne = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     try {
         const postagem = await ModelPostagem.findByPk(req.params.id, { include: ModelInstituicao });
-        return res.json({"Instituicao": postagem.instituico.nome, "mensagem": postagem.mensagem});
+        return res.json({ "Instituicao": postagem.instituico.nome, "mensagem": postagem.mensagem });
     } catch (erro) {
         return console.error("Erro na Update : ", erro);
     }
@@ -36,13 +42,11 @@ const GetOne = async(req, res) => {
 //const instituicao = await ModelInstituicao.findByPk(req.params.id, { include: Postagem });
 /////////////
 
-const Create = async(req, res) => {
-    //await db.sync({ force: true });
+const Create = async (req, res) => {
     //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
-	//Quais são os métodos que a conexão pode realizar na API
+    //Quais são os métodos que a conexão pode realizar na API
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-        
     try {
         const postagem = await ModelPostagem.create(
             {
@@ -52,41 +56,48 @@ const Create = async(req, res) => {
                 DataAtualizacao: null
             }
         );
-            return res.json(postagem);
+        return res.json(postagem);
 
-        } catch (erro) {
-            return console.error("Erro na Create : ", erro);
+    } catch (erro) {
+        return console.error("Erro na Create : ", erro);
+    }
+};
+
+const Update = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    try {
+        const postagem = await ModelPostagem.findByPk(req.params.id);
+        if (postagem) {
+            postagem.mensagem = req.body.mensagem;
+            postagem.updatedAt = new Date();
+            await postagem.save();
         }
-    };
 
-const Update = async(req, res) => {
-        try {
-            const postagem = await ModelPostagem.findByPk(req.params.id);
-            if (postagem) {
-                postagem.mensagem = req.body.mensagem;
-                postagem.updatedAt = new Date();
-                await postagem.save();
-            }
+        return res.json(postagem);
 
-            return res.json(postagem);
+    } catch (erro) {
+        return console.error("Erro na Update : ", erro);
+    }
+};
 
-        } catch (erro) {
-            return console.error("Erro na Update : ", erro);
-        }
-    };
+const Delete = async (req, res) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    try {
 
-const Delete = async(req, res) => {
-    res.header("Access-Control-Allow-Methods", 'DELETE');
-        try {
+        const postagem = await ModelPostagem.findByPk(req.params.id);
+        await postagem.destroy();
+        return res.json(postagem);
 
-            const postagem = await ModelPostagem.findByPk(req.params.id);
-            await postagem.destroy();
-            return res.json(postagem);
-
-        } catch (erro) {
-            return console.error("Erro na Update : ", erro);
-        }
-    };
+    } catch (erro) {
+        return console.error("Erro na Update : ", erro);
+    }
+};
 
 module.exports = {
     List,
